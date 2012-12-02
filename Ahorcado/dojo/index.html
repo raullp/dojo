@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<title>JUEGO AHORCADO</title>
+		<SCRIPT TYPE="text/javascript" src="ahorcado.js"></SCRIPT>
+		<script type="text/javascript" src="../support/jquery-1.4.1.js"></script>
+		<script type="text/javascript">
+			var gWord = "";
+			var gInsertedLetters = "";
+			var gPistas = "";
+			$(function() {
+				gWord = generarPalabra();
+				gInsertedLetters = "";
+					updatePistas();
+			})
+
+			function tryLetter() {
+				var $letterInput = $('#letterInput');
+				var letter = $letterInput.val();
+				gInsertedLetters += letter;
+
+				var erroneas = recuperarErroneas(gWord, gInsertedLetters);
+					$("#erroneas").text(erroneas);
+				updatePistas();
+				cleanLetterInput();
+			}
+
+			function cleanLetterInput() {
+				var $letterInput = $('#letterInput');
+				$letterInput.val('');
+				$letterInput.focus();
+			}
+
+			function updatePistas(){
+				gPistas = generarPistas(gInsertedLetters, gWord);
+				var letter = $('#pistas').text(gPistas);
+			}
+		</script>
+	</head>
+	<body>
+		Letra: <input id="letterInput" type="text" name="letrainput" maxlength="1"/>
+		<input type="button" value="Adivinar" onclick="tryLetter()"/><br/>
+		<label id="pistasLabel">Pistas: </label>
+		<label id="pistas"></label> <br/>
+		<label id="erroneasLabel">Erroneas: </label>
+		<label id="erroneas"></label><br/>
+	</body>
+</html>

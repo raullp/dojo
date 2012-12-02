@@ -1,75 +1,75 @@
 module("About Asserts (dojo/ahorcado.test.js)");
 
 test("Verificar si una letra esta dentro una palabra", function() {
+    var ahorcado = new Ahorcado("AHORCADO");
     var letra = "A";
-    var palabra = "AHORCADO";
-    var valor = letraEnPalabra(letra, palabra);
+    var valor = ahorcado.letraEnPalabra(letra);
     ok(valor,'');
 });
 
 test("Verificar si una letra NO esta dentro una palabra", function() {
+    var ahorcado = new Ahorcado("AHORCADO");
     var letra = "B";
-    var palabra = "AHORCADO";
-    var valor = letraEnPalabra(letra, palabra);
+    var valor = ahorcado.letraEnPalabra(letra);
     not(valor);
 });
 
 test("Correcta actualizacion de pistas", function() {
+   var ahorcado = new Ahorcado("HOLA");
    var letra = "A";
-   var palabra = "HOLA";
    var pistaEsperada = "_ _ _ A";
 
-   var pista = generarPistas(letra, palabra);
+   var pista = ahorcado.generarPistas(letra);
 
    equals(pista, pistaEsperada);
 });
 
 test("verificar letras usadas", function(){
-	var letrasUsadas = "OL";
-	var palabra = "HOLA";
+    var ahorcado = new Ahorcado("HOLA");
+	  var letrasUsadas = "OL";
    	var pistaEsperada = "_ O L _";
 
-   	var pista = generarPistas(letrasUsadas, palabra);
+   	var pista = ahorcado.generarPistas(letrasUsadas);
 
    	equals(pista,pistaEsperada);
 });
 
 test("Solo algunas letras coinciden", function(){
-	var letrasUsadas = "OLST";
-	var palabra = "HOLA";
+  var ahorcado = new Ahorcado("HOLA");
+	var letrasUsadas = "OLST";	
    	var pistaEsperada = "_ O L _";
 
-   	var pista = generarPistas(letrasUsadas, palabra);
+   	var pista = ahorcado.generarPistas(letrasUsadas);
 
    	equals(pista,pistaEsperada);
 });
 
 test("Palabra encontrada", function(){
+  var ahorcado = new Ahorcado("HOLA");
 	var letrasUsadas = "OLSTAH";
-	var palabra = "HOLA";
    	var pistaEsperada = "H O L A";
 
-   	var pista = generarPistas(letrasUsadas, palabra);
+   	var pista = ahorcado.generarPistas(letrasUsadas);
 
    	equals(pista,pistaEsperada);
 });
 
 test("Donde ninguna letra coincide", function(){
+  var ahorcado = new Ahorcado("RATON");
 	var letrasUsadas = "LSULYH";
-	var palabra = "RATON";
    	var pistaEsperada = "_ _ _ _ _";
 
-   	var pista = generarPistas(letrasUsadas, palabra);
+   	var pista = ahorcado.generarPistas(letrasUsadas);
 
    	equals(pista,pistaEsperada);
 });
 
 test("Donde ninguna letra coincide", function(){
+  var ahorcado = new Ahorcado("RATON");
 	var letrasUsadas = "LSULYH";
-	var palabra = "RATON";
    	var pistaEsperada = "_ _ _ _ _";
 
-   	var pista = generarPistas(letrasUsadas, palabra);
+   	var pista = ahorcado.generarPistas(letrasUsadas);
 
    	equals(pista,pistaEsperada);
 });
@@ -90,7 +90,18 @@ test("Verificacion de palabra completa",function() {
 	ok(completa);
 });
 
-test("Fail",function() {
+test("Recuperar letras erroneas", function() {
+  var palabra = "iPhone";
+  var letrasUsadas = "Android";
+
+  var erroneasEsperadas = "Adr";
+
+  var erroneasRecuperadas = recuperarErroneas(palabra, letrasUsadas);
+
+  equals(erroneasEsperadas, erroneasRecuperadas);
+});
+
+test("Fail: Ignore me!",function() {
 	var pista = "MAPA";
 	var mapa = map(pista);
 	var indicesEsperadoDeA = [1,3];
